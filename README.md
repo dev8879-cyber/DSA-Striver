@@ -8,6 +8,9 @@ Tracking my DSA journey and problem-solving progress.
 - Largest Element in Array
 - Second Largest Element in Array
 
+### Bit Manipulation
+- Solved some easy problems using bitwise operators for higher optimization.
+
 ## Goals
 - Improve problem-solving skills
 - Build consistency
