@@ -1,0 +1,59 @@
+#include<iostream>
+using namespace std;
+
+class Solution {
+public:
+
+    vector<vector<int>> ans;
+    vector<int> temp;
+
+    void solve(int index, vector<int>& nums)
+    {
+        ans.push_back(temp);
+
+        for(int i = index; i < nums.size(); i++)
+        {
+            // skip duplicates
+            if(i > index && nums[i] == nums[i - 1])
+                continue;
+
+            temp.push_back(nums[i]);
+
+            solve(i + 1, nums);
+
+            temp.pop_back();
+        }
+    }
+
+    vector<vector<int>> subsetsWithDup(vector<int>& nums)
+    {
+        sort(nums.begin(), nums.end());
+
+        solve(0, nums);
+
+        return ans;
+    }
+};
+
+int main()
+{
+    Solution obj;
+
+    vector<int> nums = {1, 2, 2};
+
+    vector<vector<int>> result = obj.subsetsWithDup(nums);
+
+    for(auto subset : result)
+    {
+        cout << "[ ";
+
+        for(auto x : subset)
+        {
+            cout << x << " ";
+        }
+
+        cout << "]" << endl;
+    }
+
+    return 0;
+}
