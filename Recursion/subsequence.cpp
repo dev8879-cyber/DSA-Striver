@@ -5,7 +5,7 @@ void prtS(int ind,vector<int>&ds,int a[],int n){
     if(ind==n){
         for(auto it:ds){
             cout<<it<<" ";
-
+            
         }
         if(ds.size()==0){
             cout<<"{}";
