@@ -2,49 +2,51 @@
 #include <vector>
 using namespace std;
 
-void dfs(int node, vector<int> adj[], vector<int>& vis) {
-
+void dfs(int node, vector<vector<int>> &isConnected, vector<int> &vis)
+{
     vis[node] = 1;
 
-    for(int neighbour : adj[node]) {
-
-        if(vis[neighbour] == 0) {
-            dfs(neighbour, adj, vis);
+    for (int neighbour = 0; neighbour < isConnected.size(); neighbour++)
+    {
+        if (isConnected[node][neighbour] == 1 && vis[neighbour] == 0)
+        {
+            dfs(neighbour, isConnected, vis);
         }
     }
 }
 
-int main() {
+int main()
+{
+    int n;
+    cout << "Enter number of cities: ";
+    cin >> n;
 
-    int n, m;
-    cin >> n >> m;
+    vector<vector<int>> isConnected(n, vector<int>(n));
 
-    vector<int> adj[n];
+    cout << "Enter Adjacency Matrix:\n";
 
-    for(int i = 0; i < m; i++) {
-
-        int u, v;
-        cin >> u >> v;
-
-        adj[u].push_back(v);
-        adj[v].push_back(u);
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            cin >> isConnected[i][j];
+        }
     }
 
     vector<int> vis(n, 0);
 
     int provinces = 0;
 
-    for(int i = 0; i < n; i++) {
-
-        if(vis[i] == 0) {
-
+    for (int i = 0; i < n; i++)
+    {
+        if (vis[i] == 0)
+        {
             provinces++;
-            dfs(i, adj, vis);
+            dfs(i, isConnected, vis);
         }
     }
 
-    cout << "Number of Provinces = "
-         << provinces << endl;
+    cout << "Number of Provinces = " << provinces << endl;
 
     return 0;
 }
