@@ -15,7 +15,7 @@ int main(){ //T.C.=O(N), S.C.=O(1)
     cout<<prev;
     return 0;
 }
-
+//Memoization:
 // int f(int n,vector<int>& dp){
 //     if(n<=1){
 //         return n;
@@ -31,7 +31,7 @@ int main(){ //T.C.=O(N), S.C.=O(1)
 //     cout<<f(n,dp);
 // }
 
-
+//Tabulation:
 // int fib(int n){
 
 //     if(n <= 1){

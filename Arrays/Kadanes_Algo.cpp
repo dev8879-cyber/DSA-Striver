@@ -46,6 +46,6 @@ int main(){
             sum=0;
         }
     }
-    cout<<"The maximum subarray sum is:"<<maxi<<endl;;
+    cout<<"The maximum subarray sum is:"<<maxi<<endl;
     cout<<"Subarray:["<<ansSt<<","<<ansEd<<"]";
 }
