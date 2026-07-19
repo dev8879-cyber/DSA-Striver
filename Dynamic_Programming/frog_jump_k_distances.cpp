@@ -69,7 +69,7 @@ int frog_k(int n, vector<int> &height, int k)
         {
             if (i - j > 0)
             {
-                int jump = frog_k(n - 1, height, k) + abs(height[n] - height[n - 1]);
+                int jump=dp[i-j]+abs(height[i]-height[i-j]);
                 minSteps = min(jump, minSteps);
             }
         }

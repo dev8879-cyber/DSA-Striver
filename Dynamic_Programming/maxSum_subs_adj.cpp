@@ -74,7 +74,7 @@ using namespace std;
 //             pick += dp[i - 2];
 //         }
 //         int no_pick = dp[i - 1];
-//         dp[n] = max(pick, no_pick);
+//         dp[i] = max(pick, no_pick);
 //     }
 //     return dp[n - 1];
 // }

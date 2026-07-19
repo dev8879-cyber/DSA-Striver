@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-// House Robber I (Space Optimized)
+// House Robber I (Space Optimized):
 int solve(vector<int>& nums)
 {
     int n = nums.size();
