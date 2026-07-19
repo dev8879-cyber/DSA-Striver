@@ -1,48 +1,38 @@
 #include<iostream>
 using namespace std;
-int solve(int ind,vector<int>& arr){
-    int prev1=arr[0];
-    int prev2=0;
-    for(int i=1;i<ind;i++){
-        int pick=arr[i];
-        if(ind>1){
-            pick+=prev1;
-        }
-        int not_pick=prev2;
-        int curi=max(pick,not_pick);
-        prev2=prev1;
-        prev1=curi;
+// Recursive:
+int f(int ind, int buy, vector<int>& prices, vector<vector<int>>& dp){
+    int profit=0;
+    if(ind==prices.size()){
+        return 0;
     }
-    return prev1;
+    if(dp[ind][buy]!=-1) return dp[ind][buy];
+    if(buy){
+        int take=-prices[ind]+f(ind+1,0,prices,dp);
+        int not_take=f(ind+1,1,prices,dp);
+        return dp[ind][buy]=max(take,not_take);
+    }
+    else{
+        int take=prices[ind]+f(ind+1,1,prices,dp);
+        int not_take=f(ind+1,0,prices,dp);
+        return dp[ind][buy]=max(take,not_take);
+    }
 }
-int houseRobber(vector<int>& nums){
-    int n=nums.size();
-    if(n==1) return nums[0];
-    vector<int>temp1;
-    vector<int>temp2;
-    for(int i = 0; i < n; i++)
-    {
-        if(i != 0)
-            temp1.push_back(nums[i]);
+int maxProfit(vector<int>& prices, vector<vector<int>>& dp)
+{
+    return f(0, 1, prices,dp);
+}
 
-        if(i != n - 1)
-            temp2.push_back(nums[i]);
-    }
-    int l=solve(n-1,temp1);
-    int r=solve(n-1,temp2);
-    return max(l,r);
-}
 int main()
 {
     int n;
     cin >> n;
 
-    vector<int> nums(n);
+    vector<int> prices(n);
 
     for(int i = 0; i < n; i++)
-        cin >> nums[i];
+        cin >> prices[i];
 
-    cout << houseRobber(nums);
-
-    return 0;
+    vector<vector<int>>dp(n,vector<int>(2,-1));
+    cout << maxProfit(prices,dp);
 }
