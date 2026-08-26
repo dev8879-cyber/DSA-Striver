@@ -13,7 +13,11 @@ int main() {
             cout << b[i];
         }
 
-        cout << b.back() << '\n';
+        if (b.length() % 2 == 0) {
+            cout << b.back();
+        }
+
+        cout << '\n';
     }
 
     return 0;
