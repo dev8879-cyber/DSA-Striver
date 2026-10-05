@@ -1,53 +1,53 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
 using namespace std;
 
-pair<int,int> findMinMax(vector<int>& arr, int low, int high){
+struct Pair {
+    int min;
+    int max;
+};
 
-    // Base Case 1
+Pair findMinMax(int arr[], int low, int high) {
+    Pair result;
+
     // Only one element
-    if(low == high){
-        return {arr[low], arr[low]};
+    if (low == high) {
+        result.min = result.max = arr[low];
+        return result;
     }
 
-    // Base Case 2
     // Two elements
-    if(high == low + 1){
-
-        if(arr[low] < arr[high]){
-            return {arr[low], arr[high]};
+    if (high == low + 1) {
+        if (arr[low] < arr[high]) {
+            result.min = arr[low];
+            result.max = arr[high];
+        } else {
+            result.min = arr[high];
+            result.max = arr[low];
         }
-        else{
-            return {arr[high], arr[low]};
-        }
+        return result;
     }
 
     // Divide
-    int mid = (low + high) / 2;
+    int mid = low + (high - low) / 2;
 
-    // Solve Left Half
-    pair<int,int> leftAns = findMinMax(arr, low, mid);
+    Pair left = findMinMax(arr, low, mid);
+    Pair right = findMinMax(arr, mid + 1, high);
 
-    // Solve Right Half
-    pair<int,int> rightAns = findMinMax(arr, mid + 1, high);
+    // Conquer / Combine
+    result.min = min(left.min, right.min);
+    result.max = max(left.max, right.max);
 
-    // Combine
-    int minimum = min(leftAns.first, rightAns.first);
-    int maximum = max(leftAns.second, rightAns.second);
-
-    return {minimum, maximum};
+    return result;
 }
 
-int main(){
+int main() {
+    int arr[] = {10, 5, 20, 3, 15, 8};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-    vector<int> arr = {7, 11, -1, 14, -6, 19, 12, 63, 8};
+    Pair result = findMinMax(arr, 0, n - 1);
 
-    int n = arr.size();
-
-    pair<int,int> ans = findMinMax(arr, 0, n - 1);
-
-    cout << "Minimum Element = " << ans.first << endl;
-    cout << "Maximum Element = " << ans.second << endl;
+    cout << "Minimum = " << result.min << endl;
+    cout << "Maximum = " << result.max << endl;
 
     return 0;
 }
